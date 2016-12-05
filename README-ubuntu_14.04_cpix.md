@@ -17,9 +17,9 @@ are scattered throughout out this document.
 Click Unity then type/select `Software & Updates` from the list of
 available system utility icons.
 
-Verify that typical repos are checked, typically it is OK to pull in.
+## II.A Verify that typical repos are checked, typically it is OK to pull in.
 
-## Ubuntu Software
+`Ubuntu Software`
 ```
 main
 universe
@@ -27,12 +27,12 @@ restricted
 multiverse
 ```
 
-## Other Software
+`Other Software`
 ```
 Canonical Partners
 ```
 
-## Updates
+`Updates`
 ```
 trusty-security
 trusty-updates
@@ -42,7 +42,7 @@ x Automatically check for updates daily
 x Download and install immediately security updates
 ```
 
-## Update Package Lists
+## II.B Update Package Lists
 Close the `Software & Updates` window and open a terminal window.
 ```
 sudo apt-get update
@@ -96,7 +96,7 @@ opening a new terminal.
 # V.    Configure Firewall
 Standardize on ufw and its graphical configuration tool gufw for now.
 
-# V.A Configure Uncomplicted Firewall (ufw)
+## V.A Configure Uncomplicted Firewall (ufw)
 Allow inbound traffic by service/port/protocol, port/protocol (only port protocol), or by port (for all protocolsr
 
 If uncomfortable at the command-line, consider using 'gksudo gufw'
@@ -111,7 +111,7 @@ e.g. Tell UFW to determine installed SSH server and setup rules on the default 2
 $ sudo ufw allow ssh
 ```
 
-# V.B Lock down networking with sysctl
+## V.B Lock down networking with sysctl
 Develop your own set of sysctl practices such as disabling IPv6, IPv4
 forwarding/reverse-path-filtering, and generally build some best
 practices for tweaking the network stack to make it more resilient
@@ -141,7 +141,7 @@ Only administrator users should be listed on the `sudo` and any of
 `adm` or `admin` lines in `/etc/group`. Typically making a user an
 administrator in the graphical interface adds them to this `sudo` group.
 
-# VI.A Lockdown accounts
+## VI.A Lockdown accounts
 Using the terminal, ensure the root account is locked down:
 ```
 sudo passwd -l root
@@ -166,7 +166,7 @@ sudo nano /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
 by appending the following line and saving the file:
 `allow-guest=false`
 
-# VI.B Update password duration and complexity policy
+## VI.B Update password duration and complexity policy
 This is changed in two places.
 ```
 sudo nano /etc/login.defs
@@ -190,7 +190,7 @@ pam_cracklib.so with the following:
 retry=3 difok=3 ucredit=1 lcredit=1 dcredit=1 ocredit=1 maxrepeat=2 minlen=12
 ```
 
-# VI.C Disable accounts, apply least privilege, reset passwords
+## VI.C Disable accounts, apply least privilege, reset passwords
 Disable any unauthorized accounts and reset passwords for all remaining
 users.
 
@@ -205,7 +205,7 @@ the password from this graphical user interface. By selecting the most
 restrictive class of user account allowed by the scenario for each user
 we give them the least amount of privilege required to do their work.
 
-# VI.D Inspect the /etc/sudoers configuration
+## VI.D Inspect the /etc/sudoers configuration
 Use the `visudo` command to view and/or edit the `sudo` configuration
 but you may want to make sure to have a terminal running as root when
 making such changes just in case something goes awry. You can open
@@ -224,7 +224,7 @@ Standardize on clamav or now.
 Once again, continue with steps below while clamav does updates and
 scans by opening a new terminal.
 
-# VII.A Use ClamAV
+## VII.A Use ClamAV
 ```
 NOTE: when I was preparing for this talk, I ran through some checklists
 that worked for our teams and I just was not able to get clamav to
@@ -297,7 +297,7 @@ Typical SSH may include openssh or dropbear, be on the lookout for
 multiple SSH servers running on different ports especially on something
 other than the default port 22/tcp.
 
-# IX.A List installed services on the command-line
+## IX.A List installed services on the command-line
 ```
 sudo service --status-all | less
 ```
@@ -310,12 +310,12 @@ sudo dpkg --get --selections | less
 sudo dpkg --get --selections | grep ${suspect}
 ```
 
-# IX.B Use top to monitor running processes
+## IX.B Use top to monitor running processes
 Look for unrecognized processes or things you know to be suspicious from
 past experience. Use `locate` or `find` to identify the location of
 rogue process files and investigate how they got there.
 
-# IX.C Use nmap or netstat to do a local port scan
+## IX.C Use nmap or netstat to do a local port scan
 Look for non-essential services or port numbers to research online.
 
 For example you may see port 631 (cups) open so that your computer can
@@ -327,7 +327,7 @@ and is not a malware process.
 An example of generally innocuous services may include `dhcp` (68)
 and `zeroconf` (5353) services.
 
-# IX.C.1 Use nmap to scan 127.0.0.1 (localhost)
+## IX.C.1 Use nmap to scan 127.0.0.1 (localhost)
 Use nmap
 ```
 nmap -sS -sU -T4 -A -v 127.0.0.1
@@ -338,7 +338,7 @@ gksudo zenmap
 ```
 with address `127.0.0.1` and choose the profile for
 
-# IX.C.2 Use netstat to check for listening ports
+### IX.C.2 Use netstat to check for listening ports
 Search all ports (tcp, udp, unix domain sockets), do not try to map port
 numbers to well known service names, list listening ports, and include
 process names in the listing.
@@ -346,7 +346,7 @@ process names in the listing.
 sudo netstat -anlp | grep -i listen
 ```
 
-# IX.D Check crontab and rc.local for suspicious service entries
+## IX.D Check crontab and rc.local for suspicious service entries
 Look at `sudo nano /etc/rc.local` and `sudo crontab -e` for anything
 suspicious either based on familiarity you already have or by comparison
 to standard configurations you can find online.
@@ -354,7 +354,7 @@ to standard configurations you can find online.
 Simplistic malware may hook into your system at boot-time through
 rc.local and persist and/or exfiltrate data through creative use of cron.
 
-# IX.E Purge the installed packages that are not longer needed
+## IX.E Purge the installed packages that are not longer needed
 Cleanup packages no longer needed after updates and removals.
 ```
 sudo apt-get --purge autoremove
@@ -365,7 +365,7 @@ At this point, we are gathering more information to identify and
 resolve the remaining issues on this system after completing all of the
 best practices captured in the rest of the checklist.
 
-# X.A Delete unauthorized users disabled in a previous step
+## X.A Delete unauthorized users disabled in a previous step
 Ensure that you have completed the forensic questions before deleting
 any user accounts.
 
@@ -379,7 +379,7 @@ e.g. Delete the user named `megatron`
 sudo deluser --remove-home megatron
 ```
 
-# X.B Do your research, a cautionary tale of chkrootkit
+## X.B Do your research, a cautionary tale of chkrootkit
 The tool `chkrootkit` can still be useful but has various known issues
 that remain unresolved and users are best served by doing research on
 any findings from this tool before removing programs/packages.
