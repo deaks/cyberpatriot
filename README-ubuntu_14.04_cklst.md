@@ -1,11 +1,11 @@
 Expanded verison with notes and commentary in-line is available online
 https://github.com/deaks/cyberpatriot/blob/master/README-ubuntu_14.04_cpix.md
 
-### I.    Complete Forensic Tasks
+#### I.    Complete Forensic Tasks
 Read and re-read the forensic prompt (README). Complete all of the
 forensics questions.
 
-### II.   Check Repos, Configure Updates, Update Package Lists
+#### II.   Check Repos, Configure Updates, Update Package Lists
 Click Unity then type/select `Software & Updates` from the list of
 available system utility icons.
 
@@ -31,7 +31,7 @@ x Download and install immediately security updates
 sudo apt-get update
 ```
 
-### III.  Verify/Install Triage Utilities
+#### III.  Verify/Install Triage Utilities
 
 ```
 sudo apt-get install \
@@ -55,7 +55,7 @@ sudo apt-get install \
     zenmap
 ```
 
-### IV.   Start Upgrade of Installed Packages and Security Patching
+#### IV.   Start Upgrade of Installed Packages and Security Patching
 ```
 sudo apt-get upgrade
 ```
@@ -63,7 +63,7 @@ sudo apt-get upgrade
 Continue with steps below while this program (upgrade) continues by
 opening a new terminal.
 
-### V.    Configure Firewall
+#### V.    Configure Firewall
 Standardize on ufw and its graphical configuration tool gufw for now.
 
 `Configure Uncomplicted Firewall (ufw)`
@@ -80,7 +80,7 @@ $ sudo ufw allow ssh
 
 `Lock down networking with sysctl`
 
-### VI.   Manage User Accounts and Login
+#### VI.   Manage User Accounts and Login
 The `/etc/shadow` and `/etc/gshadow` file should only be readable by
 the root user and all of the above files should only be writable by the
 root user.
@@ -153,10 +153,10 @@ occasion and not meant for normal use:
 sudo su -
 ```
 
-### VII.  Update and Run Antivirus
+#### VII.  Update and Run Antivirus
 TBD (clamav has been giving me issues, looking for a good alternate)
 
-### VIII. Configure and Bring Critical Services On-Line
+#### VIII. Configure and Bring Critical Services On-Line
 
 `Configure and start SSH`
 ```
@@ -167,7 +167,7 @@ PermitRootLogin no
 sudo service ssh restart
 ```
 
-### IX.   Identify and Remove Rogue Applications and Cron/Startup Entries
+#### IX.   Identify and Remove Rogue Applications and Cron/Startup Entries
 Click Unity and select `Ubuntu Software Center` then select `Installed`
 along the top of the window and scan through all the installed programs
 for anything that looks suspicious or unfamiliar.
@@ -222,7 +222,7 @@ Cleanup packages no longer needed after updates and removals.
 sudo apt-get --purge autoremove
 ```
 
-### X.    Fishing for points
+#### X.    Fishing for points
 
 `Delete unauthorized users disabled in a previous step`
 Ensure that you have completed the forensic questions before deleting
@@ -246,7 +246,7 @@ and verify that /sbin/init had been deleted from the virtual disk but
 did not have a copy of that binary handy with which to recover the VM
 and the team had to start over with a fresh copy of the VM.
 
-### Credits
+#### Credits
 I greatly appreciate the work of those who have come before and chose
 to align this content with checklists that the Rocklin High team have
 found useful and was prepared by past Cyber Patriot teams.
