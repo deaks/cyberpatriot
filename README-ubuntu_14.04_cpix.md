@@ -330,7 +330,7 @@ and `zeroconf` (5353) services.
 ## IX.C.1 Use nmap to scan 127.0.0.1 (localhost)
 Use nmap
 ```
-nmap -sS -sU -T4 -A -v 127.0.0.1
+sudo nmap -sS -sU -T4 -A -v 127.0.0.1
 ```
 or configure zenmap
 ```
