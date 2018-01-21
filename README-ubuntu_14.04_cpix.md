@@ -85,18 +85,10 @@ sudo apt-get install \
     zenmap
 ```
 
-# IV.   Start Upgrade of Installed Packages and Security Patching
-```
-sudo apt-get upgrade
-```
-
-Continue with steps below while this program (upgrade) continues by
-opening a new terminal.
-
-# V.    Configure Firewall
+# IV.   Configure Firewall
 Standardize on ufw and its graphical configuration tool gufw for now.
 
-## V.A Configure Uncomplicted Firewall (ufw)
+## IV.A Configure Uncomplicted Firewall (ufw)
 Allow inbound traffic by service/port/protocol, port/protocol (only port protocol), or by port (for all protocolsr
 
 If uncomfortable at the command-line, consider using 'gksudo gufw'
@@ -111,13 +103,13 @@ e.g. Tell UFW to determine installed SSH server and setup rules on the default 2
 $ sudo ufw allow ssh
 ```
 
-## V.B Lock down networking with sysctl
+## IV.B Lock down networking with sysctl
 Develop your own set of sysctl practices such as disabling IPv6, IPv4
 forwarding/reverse-path-filtering, and generally build some best
 practices for tweaking the network stack to make it more resilient
 against attackers.
 
-# VI.   Manage User Accounts and Login
+# V.    Manage User Accounts and Login
 Ensure user accounts are being used in accordance with policy that
 the scenario defines as acceptable. If unsure, trust the checklist and
 watch for bad-sounds that may indicate a misstep.
@@ -141,7 +133,7 @@ Only administrator users should be listed on the `sudo` and any of
 `adm` or `admin` lines in `/etc/group`. Typically making a user an
 administrator in the graphical interface adds them to this `sudo` group.
 
-## VI.A Lockdown accounts
+## V.A Lockdown accounts
 Using the terminal, ensure the root account is locked down:
 ```
 sudo passwd -l root
@@ -166,7 +158,7 @@ sudo nano /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
 by appending the following line and saving the file:
 `allow-guest=false`
 
-## VI.B Update password duration and complexity policy
+## V.B Update password duration and complexity policy
 This is changed in two places.
 ```
 sudo nano /etc/login.defs
@@ -190,7 +182,7 @@ pam_cracklib.so with the following:
 retry=3 difok=3 ucredit=1 lcredit=1 dcredit=1 ocredit=1 maxrepeat=2 minlen=12
 ```
 
-## VI.C Disable accounts, apply least privilege, reset passwords
+## V.C Disable accounts, apply least privilege, reset passwords
 Disable any unauthorized accounts and reset passwords for all remaining
 users.
 
@@ -205,7 +197,7 @@ the password from this graphical user interface. By selecting the most
 restrictive class of user account allowed by the scenario for each user
 we give them the least amount of privilege required to do their work.
 
-## VI.D Inspect the /etc/sudoers configuration
+## V.D Inspect the /etc/sudoers configuration
 Use the `visudo` command to view and/or edit the `sudo` configuration
 but you may want to make sure to have a terminal running as root when
 making such changes just in case something goes awry. You can open
@@ -217,6 +209,14 @@ sudo su -
 Check `/etc/sudoers` for explicit entries for unauthorized users or
 un-privileged user groups and remove these entries by commenting them
 out with a `#` (pound-sign) in the leftmost column of those lines.
+
+# VI.   Start Upgrade of Installed Packages and Security Patching
+```
+sudo apt-get upgrade
+```
+
+Continue with steps below while this program (upgrade) continues by
+opening a new terminal.
 
 # VII.  Update and Run Antivirus
 Standardize on clamav or now.

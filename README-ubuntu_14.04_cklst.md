@@ -55,15 +55,7 @@ sudo apt-get install \
     zenmap
 ```
 
-#### IV.   Start Upgrade of Installed Packages and Security Patching
-```
-sudo apt-get upgrade
-```
-
-Continue with steps below while this program (upgrade) continues by
-opening a new terminal.
-
-#### V.    Configure Firewall
+#### IV.   Configure Firewall
 Standardize on ufw and its graphical configuration tool gufw for now.
 
 `Configure Uncomplicted Firewall (ufw)`
@@ -80,7 +72,7 @@ $ sudo ufw allow ssh
 
 `Lock down networking with sysctl`
 
-#### VI.   Manage User Accounts and Login
+#### V.    Manage User Accounts and Login
 The `/etc/shadow` and `/etc/gshadow` file should only be readable by
 the root user and all of the above files should only be writable by the
 root user.
@@ -152,6 +144,14 @@ occasion and not meant for normal use:
 ```
 sudo su -
 ```
+
+#### VI.   Start Upgrade of Installed Packages and Security Patching
+```
+sudo apt-get upgrade
+```
+
+Continue with steps below while this program (upgrade) continues by
+opening a new terminal.
 
 #### VII.  Update and Run Antivirus
 TBD (clamav has been giving me issues, looking for a good alternate)
